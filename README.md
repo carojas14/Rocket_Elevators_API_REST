@@ -1,7 +1,7 @@
-# Rocket_Elevators_Information_System
+# Rocket_Elevators_Information_System - week 8
 
 # Description
-Rocket Elevators Website using the Ruby on rails framework. This website is connected to mysql database, user login and quote form connected. 
+Rocket Elevators Website using the Ruby on rails framework. This website is connected to mysql database, user login and quote form connected.
 The administrator of the page have access to a back office page that displays the employees section and quote form input results. We implemented some API's that retrieve status of batteries, column, elevators or that allows to change the status.
 
 Using HTML / CSS / BOOTSTRAP / JAVASCRIPT / RUBY ON RAILS FRAMEWORK
@@ -13,7 +13,7 @@ To ensure that everything is in order, you need to download ruby and rails versi
 
 # Command to use
 
-First, we use a lot of gem pluggins, so you need to type `bundle install` to download packages. It might not work because of previous tries, so you can try `bundle update`. 
+First, we use a lot of gem pluggins, so you need to type `bundle install` to download packages. It might not work because of previous tries, so you can try `bundle update`.
 
 Launch the server with : `rails s`or `rails server`.
 After that go on `http://localhost:3000/`to see the result.
@@ -26,14 +26,19 @@ Here is an example :
 
 To experiment our API's endpoint you can run `dotnet run` and in your browser or in postamn try some of these addresses :
 * `https://localhost:7235/api/batteries`to retrieve batteries status
-* `https://localhost:7235/api/batteries/1/status/Inactive` to change the status to 'Inactive' of the battery with id = 1 
+* `https://localhost:7235/api/batteries/1/status/Inactive` to change the status to 'Inactive' of the battery with id = 1
 * `https://localhost:7235/api/elevators/status` retrieving a list of Elevators that are not in operation at the time of the request (so equal to 'Inactive')
 * `https://localhost:7235/api/buildings/intervention` retrieving a list of Buildings that contain at least one battery, column or elevator requiring intervention
 * `https://localhost:7235/api/leads/pastdays` retrieving a list of Leads created in the last 30 days who have not yet become customers
 
-(If you have no result it could be possible that in your database you are not meet the conditions)
 
-# Video's Link
+New request for interventions
+
+* `https://localhost:7234/api/interventions/status` Returns all fields of all intervention Request records that do not have a start date and are in "Pending" status.
+* `https://localhost:7234/api/interventions/11/inProgress` Change the status of the intervention request to "InProgress" and add a start date and time.
+* `https://localhost:7234/api/interventions/12/completed` Changer le statut de la demande d’intervention à “Completed” et ajouter une date et heure de fin.
+
+
 
 
 

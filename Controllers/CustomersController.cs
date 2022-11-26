@@ -24,7 +24,7 @@ namespace Rocket_Elevators_Rest_API.Controllers
             var customers = await _context.customers.ToListAsync();
             return Ok(customers);
         }
-        
+
         [HttpGet("/customerobj/{email}")]
         public IActionResult GetCustomerObject(string EmailCompanyContact)
         {
