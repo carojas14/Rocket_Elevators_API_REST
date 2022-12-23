@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Rocket_Elevators_Rest_API.Models;
+#nullable disable
 
 namespace Rocket_Elevators_Rest_API.Controllers
 {
@@ -37,7 +38,7 @@ namespace Rocket_Elevators_Rest_API.Controllers
         {
             // grab battery with id id
             var battery = await _context.batteries.FindAsync(id);
-            
+
             if(battery == null) {
                 return NotFound();
             }
@@ -53,5 +54,53 @@ namespace Rocket_Elevators_Rest_API.Controllers
         public void Delete(int id)
         {
         }
+
+        [HttpGet("building/{id}")]
+        public async Task<ActionResult<IEnumerable<Battery>>> GetBatteriesByBuild(int id)
+        {
+            List<Battery> batteriesList = await _context.batteries.ToListAsync();
+            List<Battery> filteredList = new List<Battery>();
+            filteredList = batteriesList.Where(battery => battery.building_id == id).ToList();
+
+            if (filteredList == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return filteredList;
+            }
+        }
+
+
+        [Produces("application/json")]
+        [HttpGet("customer/{email}")]
+        public async Task<IActionResult> GetBatteryByCustomer(string email)
+        {
+
+
+            var customer = await _context.customers.FirstOrDefaultAsync(cust => cust.EmailCompanyContact == email);
+
+
+            /* var buildingsList =_context.buildings; */
+
+            List<Battery> customerBatteries = new List<Battery>();
+
+
+            var buildingList =_context.buildings.Where(build => build.customer_id == customer.id).ToList();
+
+            foreach (var building in buildingList)
+            {
+
+                var batteries = _context.batteries.Where(batt => building.id == batt.building_id).ToList();
+                customerBatteries.AddRange(batteries);
+            }
+
+
+            return Ok(customerBatteries);
+        }
+
+
+
     }
 }

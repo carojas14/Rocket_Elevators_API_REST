@@ -21,7 +21,7 @@ namespace Rocket_Elevators_Rest_API.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySql("server=ls-f2d6bd226744c0fcfc2009d804298a21ce412d05.crydppxblqbm.ca-central-1.rds.amazonaws.com;port=3306;database=myapp_development;uid=hello;password=Iloverails1!", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.29-mysql"));
+                //optionsBuilder.UseMySql("server=ls-f2d6bd226744c0fcfc2009d804298a21ce412d05.crydppxblqbm.ca-central-1.rds.amazonaws.com;port=3306;database=myapp_development;uid=hello;password=Iloverails1!", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.29-mysql"));
             }
         }
 
@@ -29,7 +29,7 @@ namespace Rocket_Elevators_Rest_API.Models
         {
             modelBuilder.UseCollation("utf8_general_ci")
                 .HasCharSet("utf8mb3");
-                 modelBuilder.Entity<Lead>(entity =>
+                modelBuilder.Entity<Lead>(entity =>
             {
                 entity.ToTable("leads");
                 entity.Property(e => e.id).HasColumnName("id");
@@ -64,6 +64,7 @@ namespace Rocket_Elevators_Rest_API.Models
                     .HasColumnType("datetime")
                     .HasColumnName("updated_at");
             });
+
 
         }
 

@@ -73,10 +73,21 @@ namespace Rocket_Elevators_Rest_API.Controllers
                 }
             }
 
-            return buildingIntervention;      
+            return buildingIntervention;
         }
 
-        private bool BuilingExists(int id) 
+
+
+        [HttpGet("customer/{email}")]
+        public async Task<ActionResult<IEnumerable<Building>>> GetBuildingsByCustomer(string email)
+        {
+
+            var customer = await _context.customers.Where(c => c.EmailCompanyContact == email).FirstOrDefaultAsync();
+            return await _context.buildings.Where(b => b.customer_id == customer.id).ToListAsync();
+
+        }
+
+        private bool BuilingExists(int id)
         {
             return _context.buildings.Any(e => e.id == id);
         }

@@ -101,6 +101,31 @@ namespace Rocket_Elevators_Rest_API.Controllers
             return intervention;
         }
 
+         [HttpGet("customer/{email}")]
+        public async Task<ActionResult<IEnumerable<Intervention>>> GetInterventionByCustomer(string email)
+        {
+
+            var customer = await _context.customers.Where(c => c.EmailCompanyContact == email).FirstOrDefaultAsync();
+            return await _context.interventions.Where(i => i.CustomerID == customer.id).ToListAsync();
+
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult<Intervention>> PostIntervention(Intervention intervention)
+        {
+            intervention.Status = "InProgress";
+            intervention.Result = "Incomplete";
+            intervention.EmployeeID = null;
+            intervention.StartDate = DateTime.Now;
+
+            _context.interventions.Add(intervention);
+            await _context.SaveChangesAsync();
+
+            return intervention;
+        }
+
+
         // PUT api/<InterventionsController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)

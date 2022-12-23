@@ -1,4 +1,3 @@
-#nullable disable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,24 +11,39 @@ namespace Rocket_Elevators_Rest_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomerController : ControllerBase
+    public class CustomersController : ControllerBase
     {
         private readonly RocketElevatorsContext _context;
 
-        public CustomerController(RocketElevatorsContext context) => _context = context;
+        public CustomersController(RocketElevatorsContext context)
+        {
+            _context = context;
+        }
 
         [HttpGet]
-        public async Task<IActionResult> GetCustomers()
+        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
         {
-            var customers = await _context.customers.ToListAsync();
-            return Ok(customers);
+            if (_context.customers == null)
+            {
+                return NotFound();
+            }
+            return await _context.customers.ToListAsync();
         }
 
-        [HttpGet("/customerobj/{email}")]
-        public IActionResult GetCustomerObject(string EmailCompanyContact)
+
+        [HttpGet("{email}")]
+        public async Task<ActionResult<Customer>> GetCustomer(string email)
         {
-            var customer = _context.customers.Where(c => c.EmailCompanyContact == EmailCompanyContact);
-            return Ok(customer);
+            var customer = await _context.customers.Where(c => c.EmailCompanyContact == email).FirstOrDefaultAsync();
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return customer;
         }
+
+
     }
 }
