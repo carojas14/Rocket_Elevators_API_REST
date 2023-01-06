@@ -48,7 +48,8 @@ namespace Rocket_Elevators_Rest_API.Controllers
             // grab battery with id id
             var elevator = await _context.elevators.FindAsync(id);
 
-            if(elevator == null) {
+            if (elevator == null)
+            {
                 return NotFound();
             }
             // change status of battery
@@ -58,13 +59,17 @@ namespace Rocket_Elevators_Rest_API.Controllers
             return elevator;
         }
 
-        // PUT: api/Elevators/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpGet("status")]
-        public async Task<ActionResult<IEnumerable<Elevator>>> GetElevatorStat()
+
+        // GET: api/Elevators/inactive
+        [HttpGet("inactive")]
+        public List<Elevator> GetElevatorsList(string status)
         {
-            return await _context.elevators.Where(e=>(e.elevator_status == "Inactive")).ToListAsync();
+            var elevators = _context.elevators.Where(e => e.elevator_status != "active").ToList();
+
+            return elevators;
+
         }
+
 
         // DELETE: api/Elevators/5
         [HttpDelete("{id}")]

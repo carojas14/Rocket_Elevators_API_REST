@@ -16,6 +16,7 @@ namespace Rocket_Elevators_Rest_API.Models
         public DbSet<Customer> customers { get; set; } = null!;
         public DbSet<Building> buildings { get; set; } = null!;
         public DbSet<Intervention> interventions { get; set; } = null!;
+        public DbSet<Users> users { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,41 +30,41 @@ namespace Rocket_Elevators_Rest_API.Models
         {
             modelBuilder.UseCollation("utf8_general_ci")
                 .HasCharSet("utf8mb3");
-                modelBuilder.Entity<Lead>(entity =>
-            {
-                entity.ToTable("leads");
-                entity.Property(e => e.id).HasColumnName("id");
-                entity.Property(e => e.contactBuisnessName)
-                    .HasMaxLength(255)
-                    .HasColumnName("contactBuisnessName");
-                entity.Property(e => e.created_at)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at");
-                entity.Property(e => e.contactDepartement)
-                    .HasMaxLength(255)
-                    .HasColumnName("contactDepartement");
-                entity.Property(e => e.projectDescription)
-                    .HasMaxLength(255)
-                    .HasColumnName("projectDescription");
-                entity.Property(e => e.contactEmail)
-                    .HasMaxLength(255)
-                    .HasColumnName("contactEmail");
-                entity.Property(e => e.contactName)
-                    .HasMaxLength(255)
-                    .HasColumnName("contactName");
-                entity.Property(e => e.message)
-                    .HasMaxLength(255)
-                    .HasColumnName("message");
-                entity.Property(e => e.projectName)
-                    .HasMaxLength(255)
-                    .HasColumnName("projectName");
-                entity.Property(e => e.contactPhone)
-                    .HasMaxLength(255)
-                    .HasColumnName("contactPhone");
-                entity.Property(e => e.updated_at)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at");
-            });
+            modelBuilder.Entity<Lead>(entity =>
+        {
+            entity.ToTable("leads");
+            entity.Property(e => e.id).HasColumnName("id");
+            entity.Property(e => e.contactBuisnessName)
+                .HasMaxLength(255)
+                .HasColumnName("contactBuisnessName");
+            entity.Property(e => e.created_at)
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.contactDepartement)
+                .HasMaxLength(255)
+                .HasColumnName("contactDepartement");
+            entity.Property(e => e.projectDescription)
+                .HasMaxLength(255)
+                .HasColumnName("projectDescription");
+            entity.Property(e => e.contactEmail)
+                .HasMaxLength(255)
+                .HasColumnName("contactEmail");
+            entity.Property(e => e.contactName)
+                .HasMaxLength(255)
+                .HasColumnName("contactName");
+            entity.Property(e => e.message)
+                .HasMaxLength(255)
+                .HasColumnName("message");
+            entity.Property(e => e.projectName)
+                .HasMaxLength(255)
+                .HasColumnName("projectName");
+            entity.Property(e => e.contactPhone)
+                .HasMaxLength(255)
+                .HasColumnName("contactPhone");
+            entity.Property(e => e.updated_at)
+                .HasColumnType("datetime")
+                .HasColumnName("updated_at");
+        });
 
 
         }

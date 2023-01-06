@@ -101,7 +101,7 @@ namespace Rocket_Elevators_Rest_API.Controllers
             return intervention;
         }
 
-         [HttpGet("customer/{email}")]
+        [HttpGet("customer/{email}")]
         public async Task<ActionResult<IEnumerable<Intervention>>> GetInterventionByCustomer(string email)
         {
 
