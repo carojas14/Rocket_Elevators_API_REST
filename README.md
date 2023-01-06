@@ -1,4 +1,4 @@
-# Rocket_Elevators_Information_System - week 8
+# Rocket Elevators Information System
 
 # Description
 Rocket Elevators Website using the Ruby on rails framework. This website is connected to mysql database, user login and quote form connected.
@@ -32,7 +32,7 @@ To experiment our API's endpoint you can run `dotnet run` and in your browser or
 * `https://localhost:7235/api/leads/pastdays` retrieving a list of Leads created in the last 30 days who have not yet become customers
 
 
-New request for interventions
+New requests for interventions
 
 * `https://localhost:7234/api/interventions/status` Returns all fields of all intervention Request records that do not have a start date and are in "Pending" status.
 * `https://localhost:7234/api/interventions/11/inProgress` Change the status of the intervention request to "InProgress" and add a start date and time.
